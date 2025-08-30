@@ -11,8 +11,25 @@
   padding: 14px 20px;
   text-decoration: none;
   transition: background-color 0.3s;
+  cursor: pointer;
 }
 
 .link:hover {
+  background-color: #4CAF50;
+}
+
+.button {
+  color: white;
+  background-color: transparent;
+  outline: none;
+  border:none;
+  cursor: pointer;
+  padding: 14px 20px;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: background-color 0.3s;
+}
+
+.button:hover {
   background-color: #4CAF50;
 }

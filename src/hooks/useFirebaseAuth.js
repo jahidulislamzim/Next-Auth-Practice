@@ -1,16 +1,21 @@
+"use client";
 import initializeFirebase from "@/libs/firebaseClient";
-import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
-import { useState, useEffect} from "react";
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  onAuthStateChanged,
+  signOut
+} from "firebase/auth";
+import { useState, useEffect } from "react";
 
 initializeFirebase();
 
 const useFirebase = () => {
   const auth = getAuth();
 
-  const [user, setUser] = useState(null)
+  const [user, setUser] = useState(null);
 
-
-    useEffect(() => {
+  useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setUser(user ?? null);
     });
@@ -31,7 +36,16 @@ const useFirebase = () => {
     }
   };
 
-  return { user, handleEmailSignin };
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+      return { isLogout: true, error: null };
+    } catch (error) {
+      return { isLogout: false, error };
+    }
+  };
+
+  return { user, handleEmailSignin, handleLogout};
 };
 
 export default useFirebase;
