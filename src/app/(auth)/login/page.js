@@ -1,10 +1,12 @@
 "use client";
-import useFirebase from "@/hooks/useFirebase";
+import useFirebaseAuth from "@/hooks/useFirebaseAuth";
 import styles from "./login.module.css";
+import { useRouter } from "next/navigation";
 
 const LoginForm = () => {
 
-  const {user, errorMessage, handleEmailSignin} = useFirebase();
+  const {user, handleEmailSignin} = useFirebaseAuth();
+  const router = useRouter();
 
 
   const handleForm = async (e) => {
@@ -12,7 +14,13 @@ const LoginForm = () => {
     const email = e.target.email.value;
     const password = e.target.password.value;
     const data = await handleEmailSignin(email, password);
-    console.log(data);
+    const token = await data.user.user.accessToken;
+     await fetch("/api/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ token }),
+      });
+    router.push('/');
   }
 
   return (

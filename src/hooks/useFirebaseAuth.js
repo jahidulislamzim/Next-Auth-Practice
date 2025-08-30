@@ -1,11 +1,22 @@
 import initializeFirebase from "@/libs/firebaseClient";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import { useState } from "react";
+import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
+import { useState, useEffect} from "react";
 
 initializeFirebase();
 
 const useFirebase = () => {
   const auth = getAuth();
+
+  const [user, setUser] = useState(null)
+
+
+    useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setUser(user ?? null);
+    });
+
+    return () => unsubscribe();
+  }, [auth]);
 
   const handleEmailSignin = async (email, password) => {
     try {
@@ -20,7 +31,7 @@ const useFirebase = () => {
     }
   };
 
-  return { handleEmailSignin };
+  return { user, handleEmailSignin };
 };
 
 export default useFirebase;
