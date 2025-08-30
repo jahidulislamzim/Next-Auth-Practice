@@ -8,13 +8,13 @@ import {
 } from "firebase/auth";
 import { useState, useEffect } from "react";
 
-initializeFirebase();
+initializeFirebase(); //initialize firebase config
 
 const useFirebase = () => {
   const auth = getAuth();
-
   const [user, setUser] = useState(null);
 
+  // Get user data when authentication state changes
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setUser(user ?? null);
@@ -23,6 +23,7 @@ const useFirebase = () => {
     return () => unsubscribe();
   }, [auth]);
 
+  // Function to handle login with email and password
   const handleEmailSignin = async (email, password) => {
     try {
       const userCredential = await signInWithEmailAndPassword(
@@ -36,6 +37,8 @@ const useFirebase = () => {
     }
   };
 
+
+  // Function to handle logout
   const handleLogout = async () => {
     try {
       await signOut(auth);
