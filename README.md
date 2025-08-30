@@ -32,32 +32,36 @@ This guide provides a step-by-step process for setting up **Firebase Authenticat
    Connect the logout button to the logout API and call the logout function from the useFirebaseAuth hook to log out the user securely.
 
 
-<h3 style="text-align:center">📂 Folder Structure</h3>
-<div style="display: flex; justify-content: center;">
-<pre>
-  src
-   ├─ app
-   │  ├─ (auth)
-   │  │  └─ login
-   │  │     └─ page.js
-   │  ├─ (root)
-   │  │  └─ All Page
-   │  ├─ api
-   │  │  ├─ login
-   │  │  │  └─ route.js
-   │  │  └─ logout
-   │  │     └─ route.js
-   │  ├─ layout.js
-   │  └─ page.js
-   ├─ components
-   ├─ hooks
-   │  └─ useFirebaseAuth.js
-   └─ libs
-      ├─ firebaseClient.js
-      └─ firebaseServer.js
-</pre>
-</div>
+<h3 align="center">📂 Folder Structure</h3>
+<p align="center">
+  <pre>
+src
+├─ app
+│  ├─ auth
+│  │  └─ login
+│  │     └─ page.js
+│  ├─ root
+│  │  └─ All Page
+│  ├─ api
+│  │  ├─ login
+│  │  │  └─ route.js
+│  │  └─ logout
+│  │     └─ route.js
+│  ├─ layout.js
+│  └─ page.js
+├─ components
+├─ hooks
+│  └─ useFirebaseAuth.js
+└─ libs
+   ├─ firebaseClient.js
+   └─ firebaseServer.js
+  </pre>
+</p>
 
+
+
+
+<h3 align="center">💻 Firebase Initialize Code</h3>
 
 
 
